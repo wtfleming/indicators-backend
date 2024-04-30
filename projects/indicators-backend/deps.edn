@@ -1,7 +1,8 @@
 {:deps {poly/indicator {:local/root "../../components/indicator"}
-        poly/rest-api {:local/root "../../components/rest-api"}
+        poly/rest-api {:local/root "../../bases/rest-api"}
 
         org.clojure/clojure {:mvn/version "1.11.1"}}
 
  :aliases {:test {:extra-paths []
-                  :extra-deps  {}}}}
+                  :extra-deps  {}}
+           :uberjar {:main com.wtfleming.rest-api.core}}}
