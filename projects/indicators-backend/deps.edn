@@ -1,0 +1,7 @@
+{:deps {poly/indicator {:local/root "../../components/indicator"}
+        poly/rest-api {:local/root "../../components/rest-api"}
+
+        org.clojure/clojure {:mvn/version "1.11.1"}}
+
+ :aliases {:test {:extra-paths []
+                  :extra-deps  {}}}}
