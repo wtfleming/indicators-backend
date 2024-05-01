@@ -11,12 +11,16 @@
 
 (defn get-indicators-handler [req]
   (if-let [type (-> req :params :type)]
-    (str "<h1>TODO indicators type " type "!</h1>")
-    "<h1>TODO get all indicators</h1>"))
+    (indicator/get-all-indicators-by-type type)
+    (indicator/get-all-indicators)))
+
+(defn get-indicator-by-id-handler [req]
+  (let [id (-> req :params :id)]
+    (indicator/get-indicator-by-id id)))
 
 (defroutes app-routes
   (GET "/indicators" [] get-indicators-handler)
-  (GET "/indicators/:id" [id] (str "<h1>TODO get indicator with id " id "!</h1>"))
+  (GET "/indicators/:id" [] get-indicator-by-id-handler)
   (route/not-found "<h1>Page not found</h1>"))
 
 (def app
@@ -28,13 +32,11 @@
   (reset! server (run-jetty app {:port port
                                  :join? false})))
 
-(defn -main [& args]
-  #_(println (indicator/hello (first args)))
-
+(defn -main [& _args]
   (start! 8080))
 
 (comment
-  ;; FIXME make this work - probably belongs somewhere else
+  ;; FIXME make this work in a REPL - probably belongs somewhere else
   ;; see https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/development
   (start! 8080)
 
