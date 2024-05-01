@@ -1,4 +1,5 @@
-{:deps {poly/indicator {:local/root "../../components/indicator"}
+{:deps {poly/http-server {:local/root "../../components/http-server"}
+        poly/indicator {:local/root "../../components/indicator"}
         poly/rest-api {:local/root "../../bases/rest-api"}
 
         org.clojure/clojure {:mvn/version "1.11.1"}}

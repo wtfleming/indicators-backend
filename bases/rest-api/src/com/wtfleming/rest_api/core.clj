@@ -33,6 +33,8 @@
                                  :join? false})))
 
 (defn -main [& _args]
+  ;; TODO should be able to specify the port
+  (println "Starting server on port 8080")
   (start! 8080))
 
 (comment
