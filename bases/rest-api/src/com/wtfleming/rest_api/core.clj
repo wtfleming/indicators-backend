@@ -13,14 +13,15 @@
 ;; HTTP Server handers
 ;; -------------------------
 (defn get-indicators-handler [req]
-  (let            [db nil] ;; FIXME actually get the db from the req when it has been implemented
-    (if-let [type (-> req :params :type)]
+  (let [db (:db req)]
+    (if-let [type (-> req :params :type)] ;; TODO let this above and if in here instead?
       (indicator/get-all-indicators-by-type db type)
       (indicator/get-all-indicators db))))
 
 (defn get-indicator-by-id-handler [req]
   (let [id (-> req :params :id)
-        db nil] ;; FIXME actually get the db from the req when it has been implemented
+        id (Integer/parseInt id) ;; TODO should have better validation than this
+        db (:db req)]
     (indicator/get-indicator-by-id db id)))
 
 (defroutes app-routes
@@ -28,8 +29,16 @@
   (GET "/indicators/:id" [] get-indicator-by-id-handler)
   (route/not-found "<h1>Page not found</h1>")) ;; TODO return something else, JSON?
 
+;; TODO document that there is probably a better way to do this
+(defonce ^:private the-system (atom nil))
+
+(defn add-db-to-req-middleware [handler]
+  (fn [req]
+    (handler (assoc req :db (:db @the-system)))))
+
 (def app
   (-> app-routes
+      add-db-to-req-middleware
       kp/wrap-keyword-params
       params-middleware/wrap-params))
 
@@ -41,7 +50,10 @@
 
 (defn -main [& _args]
   ;; TODO should be able to specify the port
-  (component/start (new-system))
+  (let [system (component/start (new-system))]
+    (reset! the-system system))
+
+  (println "main: the db" (:db @the-system))
 
   ;; Block forever so the server does not shutdown.
   ;; If we needed to cleanly shutdown, consider using something like
