@@ -58,7 +58,8 @@
   (let [indicators (get-in db-component [:data :indicators])
         idx (-> (get-in db-component [:data :indicator-idx-by-id])
                 (get id))]
-    (nth indicators idx)))
+    (when idx
+      (nth indicators idx))))
 
 (defn get-all-indicators
   "Returns all indicators"
