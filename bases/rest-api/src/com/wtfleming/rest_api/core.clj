@@ -2,6 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [com.wtfleming.http-server.interface :as http-server]
             [com.wtfleming.indicator.interface :as indicator]
+            [com.wtfleming.in-memory-database.interface :as db]
             [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
             [ring.middleware.keyword-params :as kp]
@@ -35,7 +36,8 @@
 ;; -------------------------
 
 (defn new-system []
-  (component/system-map :http-server (http-server/create app 8080)))
+  (component/system-map :db (db/create)
+                        :http-server (http-server/create app 8080)))
 
 (defn -main [& _args]
   ;; TODO should be able to specify the port
