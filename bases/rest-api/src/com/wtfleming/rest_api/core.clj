@@ -12,13 +12,15 @@
 ;; HTTP Server handers
 ;; -------------------------
 (defn get-indicators-handler [req]
-  (if-let [type (-> req :params :type)]
-    (indicator/get-all-indicators-by-type type)
-    (indicator/get-all-indicators)))
+  (let            [db nil] ;; FIXME actually get the db from the req when it has been implemented
+    (if-let [type (-> req :params :type)]
+      (indicator/get-all-indicators-by-type db type)
+      (indicator/get-all-indicators db))))
 
 (defn get-indicator-by-id-handler [req]
-  (let [id (-> req :params :id)]
-    (indicator/get-indicator-by-id id)))
+  (let [id (-> req :params :id)
+        db nil] ;; FIXME actually get the db from the req when it has been implemented
+    (indicator/get-indicator-by-id db id)))
 
 (defroutes app-routes
   (GET "/indicators" [] get-indicators-handler)

@@ -1,5 +1,6 @@
-(ns com.wtfleming.indicator.interface
-  (:require [com.wtfleming.indicator.core :as core]))
+(ns com.wtfleming.in-memory-database.interface
+  (:require [com.wtfleming.in-memory-database.core :as core]))
+
 
 (defn get-indicator-by-id [db id]
   (core/get-indicator-by-id db id))
