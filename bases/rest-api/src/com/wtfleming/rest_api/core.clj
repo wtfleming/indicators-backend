@@ -47,13 +47,14 @@
 
 ;; -------------------------
 
-(defn new-system []
+(defn new-system [port]
   (component/system-map :db (db/create)
-                        :http-server (http-server/create app 8080)))
+                        :http-server (http-server/create app port)))
 
-(defn -main [& _args]
-  ;; TODO should be able to specify the port
-  (let [system (component/start (new-system))]
+(defn -main [& [port]]
+  (let [port (or port (get (System/getenv) "PORT" 8080))
+        port (if (int? port) port (Integer/parseInt port))
+        system (component/start (new-system port))]
     (reset! the-system system))
 
   (println "main: the db" (:db @the-system))
