@@ -41,6 +41,7 @@
     ;; TODO the component should be idempotent?
 
     ;; TODO load data from disk here instead of using foo-db
+    ;;   make a load-db-from-file fn so we can unit/integration test it
     (assoc this :data foo-db))
 
   (stop [this]

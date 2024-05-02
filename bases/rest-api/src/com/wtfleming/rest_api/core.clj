@@ -5,8 +5,10 @@
             [com.wtfleming.in-memory-database.interface :as db]
             [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
+            [ring.middleware.json :refer [wrap-json-response]]
             [ring.middleware.keyword-params :as kp]
-            [ring.middleware.params :as params-middleware])
+            [ring.middleware.params :as params-middleware]
+            [ring.util.response :refer [response]])
   (:gen-class))
 
 ;; -------------------------
@@ -15,14 +17,14 @@
 (defn get-indicators-handler [req]
   (let [db (:db req)]
     (if-let [type (-> req :params :type)] ;; TODO let this above and if in here instead?
-      (indicator/get-all-indicators-by-type db type)
-      (indicator/get-all-indicators db))))
+      (response (indicator/get-all-indicators-by-type db type))
+      (response (indicator/get-all-indicators db)))))
 
 (defn get-indicator-by-id-handler [req]
   (let [id (-> req :params :id)
         id (Integer/parseInt id) ;; TODO should have better validation than this
         db (:db req)]
-    (indicator/get-indicator-by-id db id)))
+    (response (indicator/get-indicator-by-id db id))))
 
 (defroutes app-routes
   (GET "/indicators" [] get-indicators-handler)
@@ -38,6 +40,7 @@
 
 (def app
   (-> app-routes
+      wrap-json-response
       add-db-to-req-middleware
       kp/wrap-keyword-params
       params-middleware/wrap-params))

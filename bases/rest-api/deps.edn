@@ -1,6 +1,7 @@
 {:paths ["src" "resources"]
  :deps {compojure/compojure {:mvn/version "1.7.1"}
         com.stuartsierra/component {:mvn/version "1.1.0"}
-        ring/ring-jetty-adapter {:mvn/version "1.12.1"}}
+        ring/ring-jetty-adapter {:mvn/version "1.12.1"}
+        ring/ring-json {:mvn/version "0.5.1"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {}}}}
