@@ -3,7 +3,7 @@
         poly/in-memory-database {:local/root "../../components/in-memory-database"}
         poly/rest-api {:local/root "../../bases/rest-api"}
 
-        org.clojure/clojure {:mvn/version "1.11.1"}}
+        org.clojure/clojure {:mvn/version "1.11.2"}}
 
  :aliases {:test {:extra-paths []
                   :extra-deps  {}}
