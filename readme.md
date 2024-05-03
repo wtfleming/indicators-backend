@@ -6,6 +6,12 @@ Built in Clojure using [Polylith](https://polylith.gitbook.io/polylith)
 
 <img src="logo.png" width="30%" alt="Polylith" id="logo">
 
+## Overview
+
+The output of running the `poly info` command looks like
+
+<img src="poly-info.png" width="30%" alt="poly-info" id="poly-info">
+
 ## Requirements
 
 - A recent JVM (Java Virtual machine) I developed with 21.
