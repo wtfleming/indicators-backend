@@ -1,0 +1,17 @@
+Web pages used for research building this
+
+https://cljdoc.org/d/polylith/clj-poly/0.2.19
+
+https://github.com/weavejester/compojure
+https://github.com/ring-clojure/ring-json
+
+https://github.com/seancorfield/usermanager-example/tree/polylith
+https://github.com/furkan3ayraktar/clojure-polylith-realworld-example-app
+
+
+https://docs.docker.com/reference/dockerfile/
+https://circleci.com/blog/package-a-clojure-web-application-using-docker/
+https://hub.docker.com/_/eclipse-temurin
+
+# for refresher and middleware
+https://www.baeldung.com/clojure-ring
