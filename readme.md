@@ -4,7 +4,14 @@ Provides a JSON based REST microservice providing search capabilities on an open
 
 Built in Clojure using [Polylith](https://polylith.gitbook.io/polylith)
 
-<img src="logo.png" alt="Polylith" id="logo">
+<img src="logo.png" width="30%" alt="Polylith" id="logo">
+
+
+## Overview
+
+The output of running the `poly info` command looks like
+
+<img src="poly-info.png" alt="poly-info" id="poly-info">
 
 There are 4 Polylith `bricks`
 
@@ -13,12 +20,6 @@ There are 4 Polylith `bricks`
 - `indicator` is a `component` which provides functions for getting indicator documents
 - `rest-api` is a `base` which ties together the components
 
-
-## Overview
-
-The output of running the `poly info` command looks like
-
-<img src="poly-info.png" width="30%" alt="poly-info" id="poly-info">
 
 ## Requirements
 
