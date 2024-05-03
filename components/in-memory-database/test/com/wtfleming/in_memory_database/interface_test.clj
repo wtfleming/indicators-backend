@@ -10,6 +10,7 @@
    :content ""
    :type "IPv4"
    :id 1})
+
 (def indicator-fixture-2
   {:indicator "71.24.15.164"
    :description ""
@@ -29,22 +30,18 @@
    :id 3})
 
 (def db-fixture
-  {:data {;; Vector of all indicators
-          :indicators [indicator-fixture-1 indicator-fixture-2 indicator-fixture-3]
-
-          ;; Map for doing lookups by id
-          :indicator-idx-by-id {1 0
-                                2 1
-                                3 2}
+  {:data {;; Map of all indicators, with indicator id as key
+          :indicators {1 indicator-fixture-1
+                       2 indicator-fixture-2
+                       3 indicator-fixture-3}
 
           ;; Map representing an inverted index of indicators by type
-          :indicator-idxs-by-type {"YARA" [1]
-                                   "IPv4" [0 2]}}})
+          :indicator-type->ids {"YARA" [2]
+                                "IPv4" [1 3]}}})
 
 (def empty-db-fixture
   {:data {:indicators []
-          :indicator-idx-by-id {}
-          :indicator-idxs-by-type {}}})
+          :indicator-type->ids {}}})
 
 (deftest get-indicator-by-id-test
   (testing "a valid id returns the indicator"
