@@ -8,7 +8,7 @@
                   :extra-deps {poly/http-server {:local/root "components/http-server"}
                                poly/indicator {:local/root "components/indicator"}
                                poly/in-memory-database {:local/root "components/in-memory-database"}
-                               poly/rest-api {:local/root "components/rest-api"}
+                               poly/rest-api {:local/root "bases/rest-api"}
 
                                org.clojure/clojure {:mvn/version "1.11.1"}}}
 
