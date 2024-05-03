@@ -8,11 +8,12 @@ Built in Clojure using [Polylith](https://polylith.gitbook.io/polylith)
 
 ## Requirements
 
-A recent JVM (Java Virtual machine) I developed with 21.
-A recent Clojure CLI https://clojure.org/guides/install_clojure
-Git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+- A recent JVM (Java Virtual machine) I developed with 21.
+- A recent Clojure CLI https://clojure.org/guides/install_clojure
+- Git https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 For development or to run tests install the Polylith CLI tool https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/install
+
 You do not need the CLI tool if you just want to run the server.
 
 ## Running locally
@@ -24,8 +25,11 @@ $ ./start-dev-server.sh
 ```
 
 Navigate to a page like
+
 http://localhost:8080/indicators?type=YARA
+
 http://localhost:8080/indicators
+
 http://localhost:8080/indicators/280142346
 
 ## Endpoints
@@ -64,13 +68,7 @@ $ docker build -t indicators-backend .
 $ docker run -p 8080:8080 -it --rm indicators-backend
 ```
 
-Navigate to a page like http://localhost:8080/indicators?type=YARA
-
-
-## Misc Commands
-poly check
-poly info
-poly libs
+Verify it is running by navigating to a page like http://localhost:8080/indicators?type=YARA
 
 
 ## Database
