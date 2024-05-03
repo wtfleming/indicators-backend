@@ -2,41 +2,6 @@
   (:require [com.stuartsierra.component :as component]
             [jsonista.core :as json]))
 
-;; TODO copy/paste this into README/docs to explain how database is represented
-;;    and leave in this src file as a comment
-(def foo-db
-  {:indicators {1 {:indicator "85.93.20.243"
-                   :description ""
-                   :created "2018-07-09T18:02:40"
-                   :title ""
-                   :content ""
-                   :type "IPv4"
-                   :author-name "scottlsattler"
-                   :id 1}
-                2 {:indicator "71.24.15.164"
-                   :description ""
-                   :created "2019-07-10T18:02:40"
-                   :title ""
-                   :content ""
-                   :type "YARA"
-                   :author-name "scottlsattler"
-                   :id 2}
-                3 {:indicator "91.92.33.129"
-                   :description ""
-                   :created "2020-07-11T18:02:40"
-                   :title ""
-                   :content ""
-                   :type "IPv4"
-                   :author-name "AlienVault"
-                   :id 3}}
-   ;; Map representing an inverted index of indicators by type
-   :indicator-type->ids {"YARA" #{2}
-                         "IPv4" #{1 3}}
-
-   ;; Map representing an inverted index of indicators by author-name
-   :indicator-author-name->ids {"scottlsattler" #{1 2}
-                                "AlienVault" #{3}}})
-
 (defn- newer-indicator?
   "Returns true if indicator-a was created after indicator-b, else false."
   [indicator-a indicator-b]
@@ -111,7 +76,8 @@
     ;; TODO it turns out author-name can change
     ;;   if the search endpoint gets implemented should look at handling this
     #_(when (not= (:author-name existing-indicator) (:author-name indicator))
-      ;; TODO maybe throw an exception instead?
+        ;; Maybe throw an exception here instead?
+        ;; And when it is caught, skip updating this indicator
         (println "while indexing author-name, :author-name was not an invariant. Found:" existing-indicator "and" indicator)))
 
   ;; Note: the fields we index are expected to not have changed,

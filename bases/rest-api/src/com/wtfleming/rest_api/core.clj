@@ -15,23 +15,28 @@
 ;; HTTP Server handers
 ;; -------------------------
 (defn get-indicators-handler [req]
-  (let [db (:db req)]
-    (if-let [type (-> req :params :type)] ;; TODO let this above and if in here instead?
+  (let [db (:db req)
+        type (-> req :params :type)]
+    (if type
       (response (indicator/get-all-indicators-by-type db type))
       (response (indicator/get-all-indicators db)))))
 
 (defn get-indicator-by-id-handler [req]
   (let [id (-> req :params :id)
-        id (Integer/parseInt id) ;; TODO should have better validation than this
+        id (Integer/parseInt id)
         db (:db req)]
+    ;; TODO if result is nil, return a 404 instead?
     (response (indicator/get-indicator-by-id db id))))
 
 (defroutes app-routes
   (GET "/indicators" [] get-indicators-handler)
   (GET "/indicators/:id" [] get-indicator-by-id-handler)
-  (route/not-found "<h1>Page not found</h1>")) ;; TODO return something else, JSON?
+  (route/not-found "<h1>Page not found</h1>")) ;; probably should return something else and have it be JSON?
 
-;; TODO document that there is probably a better way to do this
+;; We want to store the database component in a request
+;; so that we can query it.
+;; There is probably a better way to do this than storing
+;; the system in an atom and getting it from middleware like this.
 (defonce ^:private the-system (atom nil))
 
 (defn add-db-to-req-middleware [handler]
