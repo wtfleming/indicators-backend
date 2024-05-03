@@ -57,19 +57,9 @@
         system (component/start (new-system port))]
     (reset! the-system system))
 
-  (println "main: the db" (:db @the-system))
-
   ;; Block forever so the server does not shutdown.
   ;; If we needed to cleanly shutdown, consider using something like
   ;; https://commons.apache.org/proper/commons-daemon/
   ;; But for the purposes of this exercise we'll just stop the server
   ;; with something like a SIGINT
   (deref (promise)))
-
-(comment
-  ;; FIXME make this work in a REPL - probably belongs somewhere else
-  ;; see https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/development
-  ;;(start! 8080)
-
-  ;;
-  )
