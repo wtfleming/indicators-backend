@@ -138,6 +138,7 @@ Or if we wanted to find all indicators created by `scottlsattler` or `AlienVault
 ## Additional work needed
 I timeboxed this project, and this is where I landed. If I spent more time on it some areas I'd work on are:
 
+- Search endpoint for bonus points. The database structure supports a limited search, but functions to implement it and the REST endpoint still need to be finished.
 - More/better testing, especially integration tests. The database component has most of the logic and has a number of tests, other components could use better coverage.
 - CI integration. Should setup a GitHub action that runs tests, clj-kondo, checks code formatting, etc.
 - Add a [Justfile](https://github.com/casey/just) or Makefile for building, testing, etc
