@@ -11,8 +11,6 @@
   (start [this]
     (println "STARTING HttpServer component on port" port)
 
-    ;; TODO the component should be idempotent?
-
     (assoc this :http-server (run-jetty handler-fn {:port port
                                                     :join? false})))
 

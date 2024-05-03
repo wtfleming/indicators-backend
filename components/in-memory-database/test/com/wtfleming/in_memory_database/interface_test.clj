@@ -1,6 +1,14 @@
 (ns com.wtfleming.in-memory-database.interface-test
   (:require [clojure.test :as test :refer :all]
+            [com.stuartsierra.component :as component]
             [com.wtfleming.in-memory-database.interface :as db]))
+
+;; These first tests build a database in a fixture that
+;; more serves as documentation of what the db internals
+;; should look like.
+;; Later tests in this file instantiate a component and
+;; load a database from a json file and are more accurate to what
+;; a running system looks like
 
 (def indicator-fixture-1
   {:indicator "85.93.20.243"
@@ -39,8 +47,12 @@
                        3 indicator-fixture-3}
 
           ;; Map representing an inverted index of indicators by type
-          :indicator-type->ids {"YARA" [2]
-                                "IPv4" [1 3]}}})
+          :indicator-type->ids {"YARA" #{2}
+                                "IPv4" #{1 3}}
+
+          ;; Map representing an inverted index of indicators by author-name
+          :indicator-author-name->ids {"scottlsattler" #{1 2}
+                                       "AlienVault" #{3}}}})
 
 (def empty-db-fixture
   {:data {:indicators []
@@ -70,3 +82,30 @@
   (testing "a type that is not present returns an empty vector"
     (is (= (db/get-all-indicators-by-type db-fixture "does-not-exist") []))))
 
+;; -------------------------
+;; Tests below this load the database from a json file
+
+;; Note: Probably want to instead use-fixtures :once
+;; so we don't build this on each test
+;; https://clojuredocs.org/clojure.test/use-fixtures
+(defn db-fixture-from-file []
+  (-> (component/system-map :db (db/create "indicators.json"))
+      component/start
+      :db))
+
+(deftest component-get-indicator-by-id-test
+  (let [db-component (db-fixture-from-file)]
+    (is (= (db/get-indicator-by-id db-component 280142346)
+           {:description "", :author-name "AlienVault", :content "", :type "CVE", :created "2018-07-05T18:45:56", :title "", :id 280142346, :indicator "CVE-2017-8291"}))))
+
+(deftest component-get-all-indicators-test
+  (let [db-component (db-fixture-from-file)
+        all-indicators (db/get-all-indicators db-component)]
+    (is (= (count all-indicators) 11498))))
+
+(deftest component-get-all-indicators-by-type-test
+  (let [db-component (db-fixture-from-file)
+        all-indicators-by-type (db/get-all-indicators-by-type db-component "YARA")]
+    (is (= (count all-indicators-by-type) 2))
+
+    (is (every? #(= "YARA" (:type %)) all-indicators-by-type))))

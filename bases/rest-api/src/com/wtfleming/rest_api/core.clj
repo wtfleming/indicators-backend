@@ -48,7 +48,7 @@
 ;; -------------------------
 
 (defn new-system [port]
-  (component/system-map :db (db/create)
+  (component/system-map :db (db/create "indicators.json")
                         :http-server (http-server/create app port)))
 
 (defn -main [& [port]]
