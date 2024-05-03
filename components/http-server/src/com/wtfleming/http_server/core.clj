@@ -14,7 +14,7 @@
     ;; TODO the component should be idempotent?
 
     (assoc this :http-server (run-jetty handler-fn {:port port
-                                 :join? false})))
+                                                    :join? false})))
 
   (stop [this]
     (println "STOPPING HttpServer component")
@@ -23,7 +23,4 @@
 (defn create [handler-fn port]
   (component/using (map->HttpServer {:handler-fn handler-fn
                                      :port port})
-                   []))
-
-
-
+                   [:db]))
