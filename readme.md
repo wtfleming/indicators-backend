@@ -135,3 +135,17 @@ The indexes are stored as sets in the event a `POST /indicators/search` is imple
 For example to get all indicators by `scottlsattler` and of type `YARA` we could fetch the sets and use a `clojure.set/intersection` to find them.
 Or if we wanted to find all indicators created by `scottlsattler` or `AlienVault` we could use a `clojure.set/union`
 
+## Additional work needed
+I timeboxed this project, and this is where I landed. If I spent more time on it some areas I'd work on are:
+
+- More/better testing, especially integration tests. The database component has most of the logic and has a number of tests, other components could use better coverage.
+- CI integration. Should setup a GitHub action that runs tests, clj-kondo, checks code formatting, etc.
+- Add a [Justfile](https://github.com/casey/just) or Makefile for building, testing, etc
+- Types for data validation using something like spec, malli, or schema
+- Look at https://github.com/ring-clojure/ring-defaults
+- Better error responses from the API, for instance calling `GET /indicators/:id` with an id that does not provide a useful error message.
+- Add a socket server like nREPL to connect to a running server
+- Telemetry. Traces (especially support for distributed since this is a microservice), metrics, and logs.
+- Better logging. Currently logging happens via println calls, should instead use a library, and include request logging.
+- Configuration. The only thing that can currently be configured is the port the HTTP server starts on.
+- Better support for developing with a REPL. I did most of the database work in a separate project with REPL driven development, then brought it over to this project, but did not get to wiring up Polylith and stuartsierra/component to where i'd like it to be
