@@ -2,4 +2,4 @@
 
 set -e
 
-java -jar projects/indicators-backend/target/indicators-backend.jar
+clojure -M:dev -m com.wtfleming.rest-api.core
