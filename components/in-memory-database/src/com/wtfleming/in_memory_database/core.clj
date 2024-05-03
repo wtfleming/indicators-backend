@@ -10,6 +10,7 @@
                    :title ""
                    :content ""
                    :type "IPv4"
+                   :author-name "scottlsattler"
                    :id 1}
                 2 {:indicator "71.24.15.164"
                    :description ""
@@ -17,6 +18,7 @@
                    :title ""
                    :content ""
                    :type "YARA"
+                   :author-name "scottlsattler"
                    :id 2}
                 3 {:indicator "91.92.33.129"
                    :description ""
@@ -24,6 +26,7 @@
                    :title ""
                    :content ""
                    :type "IPv4"
+                   :author-name "AlienVault"
                    :id 3}}
    ;; Map representing an inverted index of indicators by type
    :indicator-type->ids {"YARA" #{2}

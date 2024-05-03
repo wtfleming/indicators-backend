@@ -9,6 +9,7 @@
    :title ""
    :content ""
    :type "IPv4"
+   :author-name "scottlsattler"
    :id 1})
 
 (def indicator-fixture-2
@@ -18,6 +19,7 @@
    :title ""
    :content ""
    :type "YARA"
+   :author-name "scottlsattler"
    :id 2})
 
 (def indicator-fixture-3
@@ -27,6 +29,7 @@
    :title ""
    :content ""
    :type "IPv4"
+   :author-name "AlienVault"
    :id 3})
 
 (def db-fixture
