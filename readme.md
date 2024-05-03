@@ -59,7 +59,7 @@ docker run -p 8080:8080 -it --rm indicators-backend
 ## Misc
 poly check
 poly info
-
+poly libs
 
 
 <img src="logo.png" width="30%" alt="Polylith" id="logo">

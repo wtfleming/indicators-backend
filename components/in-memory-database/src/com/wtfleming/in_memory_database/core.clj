@@ -26,8 +26,8 @@
                    :type "IPv4"
                    :id 3}}
    ;; Map representing an inverted index of indicators by type
-   :indicator-type->ids {"YARA" [2]
-                         "IPv4" [1 3]}})
+   :indicator-type->ids {"YARA" #{2}
+                         "IPv4" #{1 3}}})
 
 ;; In Memory database implementation
 (defrecord InMemoryDatabase [data]
