@@ -37,7 +37,7 @@
 ;; so that we can query it.
 ;; There is probably a better way to do this than storing
 ;; the system in an atom and getting it from middleware like this.
-(defonce ^:private the-system (atom nil))
+(defonce the-system (atom nil))
 
 (defn add-db-to-req-middleware [handler]
   (fn [req]

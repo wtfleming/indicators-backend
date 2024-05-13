@@ -10,6 +10,7 @@
                                poly/in-memory-database {:local/root "components/in-memory-database"}
                                poly/rest-api {:local/root "bases/rest-api"}
 
+                               com.stuartsierra/component {:mvn/version "1.1.0"}
                                org.clojure/clojure {:mvn/version "1.11.2"}}}
 
             :test {:extra-paths ["components/indicator/test"
